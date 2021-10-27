@@ -1,4 +1,4 @@
--- 1) Top 5 jogadores que fizeram mais pontos na temporada 2019
+-- 1) Top 5 jogadores que fizeram mais pontos na temporada 2019 --
 
 SELECT
 detalhes.jogador_nome, SUM(detalhes.PTS) AS soma_pontos
