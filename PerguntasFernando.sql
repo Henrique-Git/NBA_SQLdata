@@ -15,7 +15,7 @@ WHERE
     group by times.id, times.apelido order by sum(jogos.PTS_visitante) desc
 LIMIT 15;
 
---  06 top 5 Temporadas com Maiores Pontuações
+--  06 top 5 Temporadas com Maiores Pontuações ---
 
 SELECT 
     jogos.temporada,
