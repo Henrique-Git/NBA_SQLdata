@@ -27,3 +27,20 @@ FROM
 
     group by jogos.temporada order by sum(jogos.PTS_casa + jogos.PTS_visitante) desc
 LIMIT 5;
+
+--- Top 15 Maiores Pontuações Jogando em Casa (2019)
+
+SELECT 
+    times.id,
+    times.apelido,
+    times.time_abrev,
+    jogos.temporada,
+    SUM(jogos.PTS_casa)
+FROM
+    t8grupo1.jogos AS jogos
+        INNER JOIN
+    t8grupo1.times AS times ON times.id = jogos.time_casa_id
+WHERE
+    jogos.temporada = '2019'
+    group by times.id, times.apelido order by sum(jogos.PTS_casa) desc
+LIMIT 15
