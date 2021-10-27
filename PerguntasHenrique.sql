@@ -1,4 +1,3 @@
-
 -- Questão 10: Top 15 maiores percentuais de vitórias dos times por temporada 
 SELECT
     ranking.time_nome AS Time_Nome,
@@ -18,4 +17,23 @@ GROUP BY
 ORDER BY
     'Vitorias%' DESC
 LIMIT
-    5
+    5 
+    
+-- Questão 11: Top 7 treinadores com maior número de vitórias na temporada de 2019
+SELECT
+    t.treinador AS Treinador,
+    r.time_nome as Nome_Time,
+    MAX(num_vitorias) as Número_Vitórias
+FROM
+    times AS t
+    INNER JOIN ranking AS r ON t.id = r.time_id
+WHERE
+    r.temporada_id = '22019'
+    OR '12019'
+GROUP BY
+    t.treinador,
+    r.time_nome
+ORDER BY
+    MAX(num_vitorias) DESC
+LIMIT
+    7
