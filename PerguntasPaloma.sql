@@ -53,3 +53,21 @@ a.time_vencedor_id = jogocasa.time_casa_id
 ORDER BY a.FG3M DESC
 LIMIT 10
 
+-- 9) Times com maiores derrotas nas últimas 3 temp
+
+SELECT
+ranking.time_nome AS Time_Nome,
+MAX(num_derrotas) AS Número_Derrotas,
+CASE
+WHEN ranking.temporada_id = '12017' THEN '2017-2018'
+WHEN ranking.temporada_id = '22017' THEN '2017-2018'
+WHEN ranking.temporada_id = '12018' THEN '2018-2019'
+WHEN ranking.temporada_id = '22018' THEN '2018-2019'
+WHEN ranking.temporada_id = '12019' THEN '2019-2020'
+WHEN ranking.temporada_id = '22019' THEN '2019-2020'
+END AS Temporada
+FROM
+ranking
+GROUP BY ranking.time_nome, ranking.temporada_id
+ORDER BY MAX(num_derrotas) DESC
+LIMIT 15
