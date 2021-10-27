@@ -1,4 +1,4 @@
--- Top 15 Maiores Pontuações Jogando Fora de Casa (2019)
+--  05 Top 15 Maiores Pontuações Jogando Fora de Casa (2019)
 
 SELECT 
     times.id,
@@ -15,7 +15,7 @@ WHERE
     group by times.id, times.apelido order by sum(jogos.PTS_visitante) desc
 LIMIT 15;
 
--- top 5 Temporadas com Maiores Pontuações
+--  06 top 5 Temporadas com Maiores Pontuações
 
 SELECT 
     jogos.temporada,
@@ -28,7 +28,7 @@ FROM
     group by jogos.temporada order by sum(jogos.PTS_casa + jogos.PTS_visitante) desc
 LIMIT 5;
 
---- Top 15 Maiores Pontuações Jogando em Casa (2019)
+--- 04 Top 15 Maiores Pontuações Jogando em Casa (2019)
 
 SELECT 
     times.id,
