@@ -18,7 +18,7 @@ ORDER BY
     'Vitorias%' DESC
 LIMIT
     5 
-    
+
 -- Questão 11: Top 7 treinadores com maior número de vitórias na temporada de 2019
 SELECT
     t.treinador AS Treinador,
@@ -36,4 +36,23 @@ GROUP BY
 ORDER BY
     MAX(num_vitorias) DESC
 LIMIT
-    7
+    7 
+
+-- Questão 12: Top 8 times com maior taxa de lances livres acertados em relação aos lances livres realizados
+SELECT
+    DISTINCT times.apelido AS Time_Nome,
+    time_vencedor_abrev AS Abreviação,
+    cidade_time AS Cidade,
+    SUM(FTM) AS 'Lances livres Acertos',
+    SUM(FTA) AS 'Lances livres Totais'
+FROM
+    detalhes_jogos
+    INNER JOIN times AS times ON times.id = detalhes_jogos.time_vencedor_id
+GROUP BY
+    times.apelido,
+    time_vencedor_abrev,
+    cidade_time
+ORDER BY
+    SUM(FTM) DESC
+LIMIT
+    8
