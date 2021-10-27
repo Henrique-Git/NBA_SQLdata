@@ -22,4 +22,34 @@ GROUP BY id
 ORDER BY Total DESC
 LIMIT 7
 
-Atividade
+-- 8) Top 10 jogadores que mais fizeram cestas de 3 jogando em casa
+SELECT
+a.jogo_id,
+a.time_vencedor_abrev,
+a.time_vencedor_id,
+a.jogador_nome,
+a.FG3M,
+a.Temporada
+FROM
+(SELECT
+jogo_id,
+detalhes.time_vencedor_abrev,
+detalhes.time_vencedor_id,
+detalhes.jogador_nome,
+detalhes.FG3M,
+CASE
+WHEN jogos.temporada = '2016' THEN '2016 - 2017'
+WHEN jogos.temporada = '2017' THEN '2017 - 2018'
+WHEN jogos.temporada = '2018' THEN '2018 - 2019'
+WHEN jogos.temporada = '2019' THEN '2019 - 2020'
+END AS Temporada
+FROM
+t8grupo1.detalhes_jogos AS detalhes
+INNER JOIN t8grupo1.jogos AS jogos ON detalhes.jogo_id = jogos.id) AS a
+INNER JOIN
+t8grupo1.jogos AS jogocasa ON jogocasa.id = a.jogo_id
+WHERE
+a.time_vencedor_id = jogocasa.time_casa_id
+ORDER BY a.FG3M DESC
+LIMIT 10
+
