@@ -1,26 +1,15 @@
--- 7) Top 7 de jogos com maiores pontuações nas temp > 2018
+-- 7) Top 10 Times com Maior Total de Pontos na Temporada 2019
 
-SELECT
-jogos.id AS id,
-jogos.data AS data_jogo,
-timesA.apelido AS Time_Casa,
-timesB.apelido AS Time_visitante,
-SUM(jogos.PTS_casa + jogos.PTS_visitante) AS Total,
-CASE
-WHEN jogos.temporada = '2018' THEN '2018 - 2019'
-WHEN jogos.temporada = '2019' THEN '2019 - 2020'
-END AS Temporada
+SELECT 
+    t.time_abrev, t.apelido, SUM(d.PTS) AS Soma_Pontos
 FROM
-t8grupo1.jogos AS jogos
-INNER JOIN
-t8grupo1.times AS timesA ON timesA.id = jogos.time_casa_id
-INNER JOIN
-t8grupo1.times AS timesB ON timesB.id = jogos.time_visitante_id
-WHERE
-jogos.temporada > 2018
-GROUP BY id
-ORDER BY Total DESC
-LIMIT 7
+    detalhes_jogos AS d
+        INNER JOIN
+    times t ON d.time_vencedor_id = t.id
+
+GROUP BY t.time_abrev, t.apelido
+ORDER BY Soma_Pontos DESC
+limit 10
 
 -- 8) Top 10 jogadores que mais fizeram cestas de 3 jogando em casa
 SELECT
