@@ -16,6 +16,8 @@ Consultas
 
 <h4 align= center>1: Top 15 jogadores com maiores pontuações na temporada de 2019.</h4>
 
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%201.png)
+
 ```
 SELECT
     detalhes.jogador_nome, 
@@ -35,6 +37,8 @@ LIMIT
 ```
 
 <h4 align= center>2: Top 15 jogadores com maior quantidade de cestas de 3 na temporada de 2019.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%202.png)
 
 ```
 SELECT
@@ -57,6 +61,8 @@ LIMIT
 
 <h4 align= center>3: Top 10 jogadores mais 'azarados' na temporada de 2019 - índice PLUS-MINUS.</h4>
 
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%203.png)
+
 ```
 SELECT
     jogos.temporada,
@@ -77,6 +83,8 @@ LIMIT
 ```
 
 <h4 align= center>4: Top 15 maiores pontuações jogando em casa na temporada de 2019.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%204.png)
 
 ```
 SELECT 
@@ -101,6 +109,8 @@ LIMIT
 
 <h4 align= center>5: Top 15 maiores pontuações jogando fora de casa na temporada de 2019.</h4>
 
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%205.png)
+
 ```
 SELECT 
     times.id,
@@ -124,6 +134,9 @@ LIMIT
 
 <h4 align= center>6: Top 5 temporadas com maiores pontuações totais.</h4>
 
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%206_Total.png)
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%206_Detalhes.png)
+
 ```
 SELECT 
     jogos.temporada,
@@ -141,6 +154,8 @@ LIMIT
 ```
 
 <h4 align= center>7: Top 10 times com maior total de pontos na temporada de 2019.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%207.png)
 
 ```
 SELECT 
@@ -160,6 +175,8 @@ LIMIT
 ```
 
 <h4 align= center>8: Top 5 jogadores que mais fizeram cestas de 3 em um único jogo.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%208.png)
 
 ```
 SELECT
@@ -194,3 +211,133 @@ ORDER BY
 LIMIT 
     10
 ```
+
+<h4 align= center>9: Times com maior número de derrotas nas últimas 3 temporadas.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%209.png)
+
+```
+SELECT
+    ranking.time_nome AS Time_Nome,
+    MAX(num_derrotas) AS Número_Derrotas,
+CASE
+    WHEN ranking.temporada_id = '12017' THEN '2017-2018'
+    WHEN ranking.temporada_id = '22017' THEN '2017-2018'
+    WHEN ranking.temporada_id = '12018' THEN '2018-2019'
+    WHEN ranking.temporada_id = '22018' THEN '2018-2019'
+    WHEN ranking.temporada_id = '12019' THEN '2019-2020'
+    WHEN ranking.temporada_id = '22019' THEN '2019-2020'
+END AS Temporada
+FROM
+    ranking
+GROUP BY 
+    ranking.time_nome,
+    ranking.temporada_id
+ORDER BY 
+    MAX(num_derrotas) DESC
+LIMIT 
+    15
+```
+
+<h4 align= center>10: Top 15 maiores percentuais de vitórias dos times por temporada.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%2010.png)
+
+```
+SELECT
+    ranking.time_nome AS Time_Nome,
+    MAX(ranking.vitorias_PCT) AS 'Vitorias%',
+    CASE
+        WHEN ranking.temporada_id = '12017' THEN '2017'
+        WHEN ranking.temporada_id = '22017' THEN '2017 - 2018'
+        WHEN ranking.temporada_id = '12018' THEN '2018'
+        WHEN ranking.temporada_id = '22018' THEN '2018 - 2019'
+        WHEN ranking.temporada_id = '12019' THEN '2019'
+        WHEN ranking.temporada_id = '22019' THEN '2019 - 2020'
+    END AS Temporada
+FROM
+    t8grupo1.ranking AS Ranking
+GROUP BY
+    ranking.id
+ORDER BY
+    'Vitorias%' DESC
+LIMIT
+    5 
+```
+
+<h4 align= center>11: Top 7 treinadores com maior número de vitórias na temporada de 2019.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%2011.png)
+
+```
+SELECT
+    t.treinador AS Treinador,
+    r.time_nome as Nome_Time,
+    MAX(num_vitorias) as Número_Vitórias
+FROM
+    times AS t
+INNER JOIN
+    ranking AS r ON t.id = r.time_id
+WHERE
+    r.temporada_id = '22019' OR '12019'
+GROUP BY
+    t.treinador,
+    r.time_nome
+ORDER BY
+    MAX(num_vitorias) DESC
+LIMIT
+    7 
+```
+
+<h4 align= center>12: Top 8 times com maior taxa de lances livres acertados em relação aos lances livres realizados.</h4>
+
+![screenshot](https://github.com/Henrique-Git/Projeto_Modulo3/blob/main/Gr%C3%A1ficos/Question%2012.png)
+
+```
+SELECT
+    DISTINCT 
+    times.apelido AS Time_Nome,
+    time_vencedor_abrev AS Abreviação,
+    cidade_time AS Cidade,
+    SUM(FTM) AS 'Lances livres Acertos',
+    SUM(FTA) AS 'Lances livres Totais'
+FROM
+    detalhes_jogos
+INNER JOIN
+    times AS times ON times.id = detalhes_jogos.time_vencedor_id
+GROUP BY
+    times.apelido,
+    time_vencedor_abrev,
+    cidade_time
+ORDER BY
+    SUM(FTM) DESC
+LIMIT
+    8
+```
+
+Tecnologias
+-------------------
+
+* #### MySQL Workbench
+* #### Metabase
+
+
+Equipe
+-------------------
+
+<h4>:octocat:Fernando Agostini</h4>
+<a href="https://github.com/FernandoAgostini28" alt="Instagram" target="_blank">
+  <img src="https://img.shields.io/badge/-Github-orange?style=static&labelColor=black&logo=github&logoColor=white&link=https://github.com/FernandoAgostini28">
+</a>
+<h4>:octocat:Henrique Medeiros</h4>
+<a href="https://github.com/Henrique-Git" alt="Instagram" target="_blank">
+  <img src="https://img.shields.io/badge/-Github-orange?style=static&labelColor=black&logo=github&logoColor=white&link=https://github.com/Henrique-Git">
+</a>
+<h4>:octocat:João Michael Ferreira</h4>
+<a href="https://github.com/Maicon-MK" alt="Instagram" target="_blank">
+  <img src="https://img.shields.io/badge/-Github-orange?style=static&labelColor=black&logo=github&logoColor=white&link=https://github.com/Maicon-MK">
+</a>
+<h4>:octocat:Paloma Carvalho</h4>
+<a href="https://github.com/PalomaBarreto" alt="Instagram" target="_blank">
+  <img src="https://img.shields.io/badge/-Github-orange?style=static&labelColor=black&logo=github&logoColor=white&link=https://github.com/PalomaBarreto">
+</a>
