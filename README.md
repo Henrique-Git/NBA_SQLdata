@@ -1,4 +1,4 @@
-<h1 align= center>:basketball:Projeto_Modulo3:basketball:</h1>
+<h1 align= center>:basketball:NBA_SQLdata:basketball:</h1>
 
 <h4 align= center>Projeto realizado para fins educativos pela equipe: Fernando Agostini, Henrique Medeiros, João Michael Ferreira e Paloma Carvalho. O projeto consiste da representação visual de dados como forma de responder determinadas perguntas sobre o universo da NBA.</h4>
 
